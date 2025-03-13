@@ -119,9 +119,7 @@ function HeroGeometric({
 
                     <motion.div custom={3} variants={fadeUpVariants} initial="hidden" animate="visible" className="flex flex-col sm:flex-row gap-4 justify-center">
                         
-                        <button className="px-6 py-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 text-white/70 font-medium hover:bg-white/10 transition-colors">
-                            View Habits
-                        </button>
+                        
                     </motion.div>
                 </div>
             </div>
