@@ -48,9 +48,19 @@ const HomePage = () => {
           <Calendar size={24} className="text-muted-foreground" />
           <span className="text-xs mt-1">Calendar</span>
         </Button>
+        <Button 
+          variant="default" 
+          className="flex items-center justify-center rounded-full h-14 w-14 shadow-lg -mt-6"
+        >
+          <PlusCircle size={28} />
+        </Button>
         <Button variant="ghost" className="flex flex-col items-center px-4">
           <Award size={24} className="text-muted-foreground" />
           <span className="text-xs mt-1">Progress</span>
+        </Button>
+        <Button variant="ghost" className="flex flex-col items-center px-4">
+          <Sparkles size={24} className="text-muted-foreground" />
+          <span className="text-xs mt-1">Achievements</span>
         </Button>
       </motion.div>
     </div>
