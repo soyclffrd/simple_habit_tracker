@@ -4,14 +4,7 @@ import { HeroGeometric } from '@/components/ui/shape-landing-hero';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { format } from 'date-fns';
-import { 
-  CheckCircle2, 
-  PlusCircle, 
-  Calendar, 
-  Award,
-  Sparkles
-} from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useNavigate } from 'react-router-dom';
 
 const getGreeting = () => {
   const hour = new Date().getHours();
@@ -21,9 +14,9 @@ const getGreeting = () => {
 };
 
 const HomePage = () => {
-  const isMobile = useIsMobile();
   const today = new Date();
   const greeting = getGreeting();
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col min-h-screen bg-[#030303]">
@@ -34,35 +27,49 @@ const HomePage = () => {
         description="Track your progress, build consistency, and achieve your goals with our simple habit tracking system."
       />
       
-      <motion.div 
-        className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-md border-t border-border p-4 flex justify-around items-center"
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0.8, type: "spring", stiffness: 300, damping: 30 }}
-      >
-        <Button variant="ghost" className="flex flex-col items-center px-4">
-          <CheckCircle2 size={24} className="text-primary" />
-          <span className="text-xs mt-1">Today</span>
-        </Button>
-        <Button variant="ghost" className="flex flex-col items-center px-4">
-          <Calendar size={24} className="text-muted-foreground" />
-          <span className="text-xs mt-1">Calendar</span>
-        </Button>
-        <Button 
-          variant="default" 
-          className="flex items-center justify-center rounded-full h-14 w-14 shadow-lg -mt-6"
+      <div className="relative z-10 container mx-auto px-4 md:px-6">
+        <motion.div 
+          className="max-w-3xl mx-auto flex flex-col sm:flex-row gap-4 justify-center mt-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3, duration: 1 }}
         >
-          <PlusCircle size={28} />
-        </Button>
-        <Button variant="ghost" className="flex flex-col items-center px-4">
-          <Award size={24} className="text-muted-foreground" />
-          <span className="text-xs mt-1">Progress</span>
-        </Button>
-        <Button variant="ghost" className="flex flex-col items-center px-4">
-          <Sparkles size={24} className="text-muted-foreground" />
-          <span className="text-xs mt-1">Achievements</span>
-        </Button>
-      </motion.div>
+          <Button 
+            className="px-6 py-3 rounded-lg bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
+            onClick={() => navigate("/add-habit")}
+          >
+            Get Started
+          </Button>
+          <Button 
+            className="px-6 py-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 text-white/70 font-medium hover:bg-white/10 transition-colors"
+            onClick={() => navigate("/view-habits")}
+          >
+            View Habits
+          </Button>
+        </motion.div>
+      </div>
+      
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center pb-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="flex flex-col items-center"
+        >
+          <span className="text-white/30 text-sm mb-2">Scroll to explore</span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ 
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "loop"
+            }}
+            className="w-1.5 h-8 rounded-full border border-white/20 flex justify-center overflow-hidden"
+          >
+            <motion.div className="w-1 h-2 bg-white/40 rounded-full mt-1" />
+          </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 };
