@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Dock } from '@/components/ui/dock';
 import { 
   CheckCircle2, 
@@ -11,6 +11,9 @@ import {
 } from 'lucide-react';
 
 const Layout = () => {
+  const location = useLocation();
+  const path = location.pathname === '/' ? '/today' : location.pathname;
+
   const navItems = [
     { icon: CheckCircle2, label: "Today", path: "/today" },
     { icon: Calendar, label: "Calendar", path: "/calendar" },
@@ -22,7 +25,7 @@ const Layout = () => {
   return (
     <>
       <Outlet />
-      <Dock items={navItems} />
+      <Dock items={navItems} activePath={path} />
     </>
   );
 };
