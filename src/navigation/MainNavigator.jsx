@@ -1,26 +1,23 @@
 
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text } from 'react-native';
-import { Calendar, CheckCircle, PlusCircle, Award, BarChart2 } from 'react-native-svg';
+import { CheckCircle, Calendar, PlusCircle, Award, BarChart2 } from 'react-native-feather';
 
 // Screens
 import TodayScreen from '../screens/TodayScreen';
-import ViewHabitsScreen from '../screens/ViewHabitsScreen';
-import AddHabitScreen from '../screens/AddHabitScreen';
 import CalendarScreen from '../screens/CalendarScreen';
+import AddHabitScreen from '../screens/AddHabitScreen';
 import ProgressScreen from '../screens/ProgressScreen';
 import AchievementsScreen from '../screens/AchievementsScreen';
 
 const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
 
 // Custom tab bar icon
 const TabIcon = ({ focused, icon: Icon, label }) => {
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      <Icon width={24} height={24} color={focused ? '#7C3AED' : '#9CA3AF'} />
+      <Icon stroke={focused ? '#7C3AED' : '#9CA3AF'} width={24} height={24} />
       <Text style={{ color: focused ? '#7C3AED' : '#9CA3AF', fontSize: 12, marginTop: 4 }}>
         {label}
       </Text>
@@ -51,11 +48,11 @@ const MainNavigator = () => {
         }}
       />
       <Tab.Screen 
-        name="ViewHabits" 
-        component={ViewHabitsScreen} 
+        name="Calendar" 
+        component={CalendarScreen} 
         options={{
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={() => <Text style={{fontSize: 24, color: focused ? '#7C3AED' : '#9CA3AF'}}>☰</Text>} label="Habits" />
+            <TabIcon focused={focused} icon={Calendar} label="Calendar" />
           ),
         }}
       />
@@ -69,20 +66,20 @@ const MainNavigator = () => {
         }}
       />
       <Tab.Screen 
-        name="Calendar" 
-        component={CalendarScreen} 
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} icon={Calendar} label="Calendar" />
-          ),
-        }}
-      />
-      <Tab.Screen 
         name="Progress" 
         component={ProgressScreen} 
         options={{
           tabBarIcon: ({ focused }) => (
             <TabIcon focused={focused} icon={BarChart2} label="Progress" />
+          ),
+        }}
+      />
+      <Tab.Screen 
+        name="Achievements" 
+        component={AchievementsScreen} 
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <TabIcon focused={focused} icon={Award} label="Achievements" />
           ),
         }}
       />

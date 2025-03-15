@@ -1,26 +1,20 @@
 
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import HabitHeader from '../components/HabitHeader';
-import ContentContainer from '../components/ContentContainer';
 
 const ProgressScreen = () => {
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <HabitHeader 
-          badge="Your Journey"
-          title1="Habit"
-          title2="Progress"
-          description="See how consistent you've been with your habits over time."
-        />
-        
-        <View style={styles.contentSection}>
-          <ContentContainer title="Your Progress">
-            <Text style={styles.emptyText}>Start tracking habits to see your progress charts here.</Text>
-          </ContentContainer>
-        </View>
-      </ScrollView>
+      <HabitHeader 
+        badge="PROGRESS"
+        title1="Your Success" 
+        title2="Journey!" 
+        description="Track your habit completion rates and view detailed statistics."
+      />
+      <View style={styles.content}>
+        <Text style={styles.placeholder}>Progress charts coming soon</Text>
+      </View>
     </View>
   );
 };
@@ -30,17 +24,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#030303',
   },
-  scrollContent: {
-    flexGrow: 1,
+  content: {
+    marginTop: -60,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  contentSection: {
-    marginTop: -50,
-    paddingBottom: 40,
-  },
-  emptyText: {
-    color: 'rgba(255, 255, 255, 0.6)',
-    textAlign: 'center',
-    paddingVertical: 20,
+  placeholder: {
+    color: '#9CA3AF',
+    fontSize: 16,
+    padding: 20,
+    backgroundColor: 'rgba(18, 18, 18, 0.8)',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    overflow: 'hidden',
   },
 });
 

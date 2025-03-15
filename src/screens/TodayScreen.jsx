@@ -1,27 +1,37 @@
 
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { format } from 'date-fns';
+import React, { useState } from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import HabitHeader from '../components/HabitHeader';
-import ContentContainer from '../components/ContentContainer';
+import HabitList from '../components/HabitList';
+
+const mockHabits = [
+  { id: '1', name: 'Morning Meditation', icon: 'Sparkles', completed: false, streak: 5, category: 'wellness', time: '8:00 AM' },
+  { id: '2', name: 'Read 30 pages', icon: 'BookOpen', completed: true, streak: 12, category: 'learning', time: '9:00 PM' },
+  { id: '3', name: 'Workout Session', icon: 'Dumbbell', completed: false, streak: 3, category: 'fitness', time: '6:30 PM' },
+  { id: '4', name: 'Drink Water', icon: 'Droplets', completed: true, streak: 8, category: 'health', time: 'All day' },
+];
 
 const TodayScreen = () => {
-  const today = new Date();
-  
+  const [habits, setHabits] = useState(mockHabits);
+
+  const toggleHabit = (id) => {
+    setHabits(habits.map(habit => 
+      habit.id === id ? { ...habit, completed: !habit.completed } : habit
+    ));
+  };
+
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
+      <ScrollView>
         <HabitHeader 
-          badge={format(today, 'EEEE, MMM d')}
-          title1="Today's"
-          title2="Habits"
-          description="Complete your daily habits to build consistency and achieve your goals."
+          badge="TODAY'S HABITS"
+          title1="Keeping the" 
+          title2="Streak Alive!" 
+          description="Stay on track with your daily habits and build lasting routines."
         />
         
-        <View style={styles.contentSection}>
-          <ContentContainer title="Your habits for today">
-            <Text style={styles.emptyText}>No habits added yet. Add your first habit to get started!</Text>
-          </ContentContainer>
+        <View style={styles.content}>
+          <HabitList habits={habits} onToggle={toggleHabit} />
         </View>
       </ScrollView>
     </View>
@@ -33,17 +43,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#030303',
   },
-  scrollContent: {
-    flexGrow: 1,
-  },
-  contentSection: {
-    marginTop: -50,
-    paddingBottom: 40,
-  },
-  emptyText: {
-    color: 'rgba(255, 255, 255, 0.6)',
-    textAlign: 'center',
-    paddingVertical: 20,
+  content: {
+    marginTop: -80,
+    paddingBottom: 100,
   },
 });
 
