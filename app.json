@@ -16,16 +16,52 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos for habit tracking.",
+        "NSPhotoLibraryUsageDescription": "This app accesses your photos to allow you to upload images for habit tracking.",
+        "NSMicrophoneUsageDescription": "This app uses the microphone for recording voice notes.",
+        "NSLocationWhenInUseUsageDescription": "This app uses your location for location-based habit tracking."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#030303"
-      }
+      },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "RECORD_AUDIO",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Habit Tracker to access your camera."
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow Habit Tracker to access your photos.",
+          "savePhotosPermission": "Allow Habit Tracker to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Habit Tracker to use your location."
+        }
+      ]
+    ]
   }
 }
