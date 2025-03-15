@@ -12,6 +12,7 @@ interface DockProps {
     label: string
     path: string
   }[]
+  activePath?: string // Added the activePath prop
 }
 
 interface DockIconButtonProps {
@@ -67,8 +68,10 @@ const DockIconButton = React.forwardRef<HTMLButtonElement, DockIconButtonProps>(
 )
 DockIconButton.displayName = "DockIconButton"
 
-export function Dock({ items, className }: DockProps) {
+export function Dock({ items, className, activePath }: DockProps) {
   const location = useLocation();
+  // Use the provided activePath if available, otherwise use location.pathname
+  const currentPath = activePath || location.pathname;
   
   return (
     <motion.div 
@@ -93,7 +96,7 @@ export function Dock({ items, className }: DockProps) {
           <DockIconButton 
             key={item.label} 
             {...item} 
-            isActive={location.pathname === item.path} 
+            isActive={currentPath === item.path} 
           />
         ))}
       </motion.div>
